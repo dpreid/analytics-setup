@@ -16,10 +16,22 @@ done
 scriptfile=./enable-logging-clients.sh
 touch "${scriptfile}"
 rm "${scriptfile}"
-echo "#!/bin/bash" >> ./enable-logging-clients.sh
+echo "#!/bin/bash" >> "${scriptfile}"
 for i in $DIR/log.access.*; do
 	[[ $i =~ $filename ]]
 	dest="${BASH_REMATCH[2]}"
 	service="$dest" envsubst < ../files/template.start >> "${scriptfile}"
+done
+chmod +x "${scriptfile}"
+
+# write a script to disable and stop these services
+scriptfile=./disable-logging-clients.sh
+touch "${scriptfile}"
+rm "${scriptfile}"
+echo "#!/bin/bash" >> "${scriptfile}"
+for i in $DIR/log.access.*; do
+	[[ $i =~ $filename ]]
+	dest="${BASH_REMATCH[2]}"
+	service="$dest" envsubst < ../files/template.stop >> "${scriptfile}"
 done
 chmod +x "${scriptfile}"

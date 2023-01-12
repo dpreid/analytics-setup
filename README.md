@@ -287,3 +287,59 @@ WantedBy=multi-user.target
 ```
 
 
+We also need to add the python packages whilst root (this could cause system issues so don't do this on a shared server)
+
+```
+sudo su
+pip3 install websocket-client
+pip3 install networkx
+pip3 install pyvis
+pip3 install matplotlib
+
+```
+
+
+The python code is using 5-26% CPU on t2.medium with no logging taking place (17% shown in image below, but varies every few seconds)
+
+```
+
+ubuntu@ip-172-31-32-44:~$ top
+
+
+top - 15:16:47 up 3 min,  1 user,  load average: 11.64, 5.63, 2.21
+Tasks: 131 total,  13 running, 118 sleeping,   0 stopped,   0 zombie
+%Cpu(s): 88.8 us, 11.2 sy,  0.0 ni,  0.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+MiB Mem :   3921.0 total,   2657.4 free,    662.0 used,    601.6 buff/cache
+MiB Swap:      0.0 total,      0.0 free,      0.0 used.   3036.5 avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND                                                                                
+   2753 root      20   0  183696  78292  27112 R  17.3   1.9   0:00.57 python3                                                                                
+   2757 root      20   0  178216  72412  25840 R  17.3   1.8   0:00.54 python3                                                                                
+   2743 root      20   0       0      0      0 R  17.0   0.0   0:00.75 python3                                                                                
+   2747 root      20   0  186384  81788  27940 R  17.0   2.0   0:00.66 python3                                                                                
+   2750 root      20   0  184904  79772  27472 R  16.3   2.0   0:00.60 python3                                                                                
+   2749 root      20   0  184904  79804  27504 R  16.0   2.0   0:00.59 python3                                                                                
+   2754 root      20   0  179968  74044  25856 R  16.0   1.8   0:00.55 python3                                                                                
+   2762 root      20   0  166928  64316  23880 R  14.7   1.6   0:00.44 python3                                                                                
+   2770 root      20   0  137456  41552  19992 R   7.0   1.0   0:00.21 python3                                                                                
+   2772 root      20   0  136432  41020  20092 R   7.0   1.0   0:00.21 python3                                                                                
+      1 root      20   0  101996  11276   8268 S   0.7   0.3   0:06.25 systemd                                                                                
+   2777 root      20   0   16268   9700   5992 R   0.7   0.2   0:00.02 python3                                                                                
+     22 root      20   0       0      0      0 S   0.3   0.0   0:00.29 ksoftirqd/1                                                                            
+    174 root      19  -1   59772  22016  20836 S   0.3   0.5   0:01.39 systemd-journal                                                                        
+    466 root      20   0  242896  11264   8316 S   0.3   0.3   0:00.18 accounts-daemon                                                                        
+    499 root      20   0   16620   7524   6648 S   0.3   0.2   0:00.16 systemd-logind                                                                         
+      2 root      20   0       0      0      0 S   0.0   0.0   0:00.00 kthreadd                                                                               
+      3 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 rcu_gp                                                                                 
+      4 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 rcu_par_gp                                                                             
+      5 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 slub_flushwq                                                                           
+      6 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 netns                                                                                  
+      7 root      20   0       0      0      0 I   0.0   0.0   0:00.00 kworker/0:0-cgroup_destroy                                                             
+      8 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/0:0H-kblockd                                                                   
+      9 root      20   0       0      0      0 I   0.0   0.0   0:00.14 kworker/u30:0-events_unbound                                                           
+     10 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 mm_percpu_wq                                                                           
+     11 root      20   0       0      0      0 S   0.0   0.0   0:00.00 rcu_tasks_rude_                                                                        
+     12 root      20   0       0      0      0 S   0.0   0.0   0:00.00 rcu_tasks_trace                                                                        
+     13 root      20   0       0      0      0 R   0.0   0.0   0:00.26 ksoftirqd/0       
+
+```
