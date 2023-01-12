@@ -343,3 +343,29 @@ MiB Swap:      0.0 total,      0.0 free,      0.0 used.   3036.5 avail Mem
      13 root      20   0       0      0      0 R   0.0   0.0   0:00.26 ksoftirqd/0       
 
 ```
+
+This load was found to be the scripts erroring out due to mnissinbg libraries. There is about 22% load on start up now, but soon disappear without traffic.
+
+## File organisation
+
+Must avoid multiple processes writing to the same files - could cause messages to be garbled or processes to pause pending on file being available (more of a windows thing) but gnerally, it's a code smell to have race conditions like this.
+
+So proposal - write to `user-hardware.log` so that there is only a single process writing to any given file.
+
+When it is time to provide analytics, the users' files will have to be located and read (directory walk using glob pattern)
+
+You won't get the message rate you need with open/close on each file (benchmarked elsewhere at 300ms/line)
+
+
+## Write/Read speed
+
+move to parquet/feather and cvontinue to work with pandas due to [speedup](https://towardsdatascience.com/optimize-python-performance-with-better-data-storage-d119b43dd25a)
+
+
+## multiple websocket clients
+
+use async approach, with dispatcher:
+
+https://websocket-client.readthedocs.io/en/latest/examples.html#dispatching-multiple-websocketapps
+note that rel is not availabe on conda, so need to use pip install and skip running in spyder 
+
