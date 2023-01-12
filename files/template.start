@@ -1,0 +1,2 @@
+systemctl enable "${service}"
+systemctl start "${service}"

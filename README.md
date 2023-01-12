@@ -53,7 +53,7 @@ $ cd relay
 $ go mod tidy
 $ cd cmd/session
 $ go build
-$ sudo cp session /usr/local/bin
+$ sudo cp session /usr/local/bin/session-relay
 $ which session 
 /usr/local/bin/session
 ```
@@ -131,31 +131,31 @@ systemctl start session
 We need a connection for every spinner in the range spin30-spin41
 ```
 #!/bin/sh
-spin30AccessFile="/etc/practable/spin30.access"
-spin31AccessFile="/etc/practable/spin31.access"
-spin32AccessFile="/etc/practable/spin32.access"
-spin33AccessFile="/etc/practable/spin33.access"
-spin34AccessFile="/etc/practable/spin34.access"
-spin35AccessFile="/etc/practable/spin35.access"
-spin36AccessFile="/etc/practable/spin36.access"
-spin37AccessFile="/etc/practable/spin37.access"
-spin38AccessFile="/etc/practable/spin38.access"
-spin39AccessFile="/etc/practable/spin39.access"
-spin40AccessFile="/etc/practable/spin40.access"
-spin41AccessFile="/etc/practable/spin41.access"
+spin30AccessFile="/etc/practable/log.access.spin30"
+spin31AccessFile="/etc/practable/log.access.spin31"
+spin32AccessFile="/etc/practable/log.access.spin32"
+spin33AccessFile="/etc/practable/log.access.spin33"
+spin34AccessFile="/etc/practable/log.access.spin34"
+spin35AccessFile="/etc/practable/log.access.spin35"
+spin36AccessFile="/etc/practable/log.access.spin36"
+spin37AccessFile="/etc/practable/log.access.spin37"
+spin38AccessFile="/etc/practable/log.access.spin38"
+spin39AccessFile="/etc/practable/log.access.spin39"
+spin40AccessFile="/etc/practable/log.access.spin40"
+spin41AccessFile="/etc/practable/log.access.spin41"
 
-spin30TokenFile="/etc/practable/spin30.token"
-spin31TokenFile="/etc/practable/spin31.token"
-spin32TokenFile="/etc/practable/spin32.token"
-spin33TokenFile="/etc/practable/spin33.token"
-spin34TokenFile="/etc/practable/spin34.token"
-spin35TokenFile="/etc/practable/spin35.token"
-spin36TokenFile="/etc/practable/spin36.token"
-spin37TokenFile="/etc/practable/spin37.token"
-spin38TokenFile="/etc/practable/spin38.token"
-spin39TokenFile="/etc/practable/spin39.token"
-spin40TokenFile="/etc/practable/spin40.token"
-spin41TokenFile="/etc/practable/spin41.token"
+spin30TokenFile="/etc/practable/log.token.spin30"
+spin31TokenFile="/etc/practable/log.token.spin31"
+spin32TokenFile="/etc/practable/log.token.spin32"
+spin33TokenFile="/etc/practable/log.token.spin33"
+spin34TokenFile="/etc/practable/log.token.spin34"
+spin35TokenFile="/etc/practable/log.token.spin35"
+spin36TokenFile="/etc/practable/log.token.spin36"
+spin37TokenFile="/etc/practable/log.token.spin37"
+spin38TokenFile="/etc/practable/log.token.spin38"
+spin39TokenFile="/etc/practable/log.token.spin39"
+spin40TokenFile="/etc/practable/log.token.spin40"
+spin41TokenFile="/etc/practable/log.token.spin41"
 
 spin30Access=$(cat "$spin30AccessFile")
 spin31Access=$(cat "$spin31AccessFile")
@@ -185,17 +185,17 @@ spin41Token=$(cat "$spin41TokenFile")
 
 
 curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin30","destination":"'"${spin30Access}"'","id":"0","token":"'"${spin30Token}"'"}' http://localhost:8888/api/destinations
-curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin31","destination":"'"${spin31Access}"'","id":"0","token":"'"${spin31Token}"'"}' http://localhost:8888/api/destinations
-curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin32","destination":"'"${spin32Access}"'","id":"0","token":"'"${spin32Token}"'"}' http://localhost:8888/api/destinations
-curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin33","destination":"'"${spin33Access}"'","id":"0","token":"'"${spin33Token}"'"}' http://localhost:8888/api/destinations
-curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin34","destination":"'"${spin34Access}"'","id":"0","token":"'"${spin34Token}"'"}' http://localhost:8888/api/destinations
-curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin35","destination":"'"${spin35Access}"'","id":"0","token":"'"${spin35Token}"'"}' http://localhost:8888/api/destinations
-curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin36","destination":"'"${spin36Access}"'","id":"0","token":"'"${spin36Token}"'"}' http://localhost:8888/api/destinations
-curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin37","destination":"'"${spin37Access}"'","id":"0","token":"'"${spin37Token}"'"}' http://localhost:8888/api/destinations
-curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin38","destination":"'"${spin38Access}"'","id":"0","token":"'"${spin38Token}"'"}' http://localhost:8888/api/destinations
-curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin39","destination":"'"${spin39Access}"'","id":"0","token":"'"${spin39Token}"'"}' http://localhost:8888/api/destinations
-curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin40","destination":"'"${spin40Access}"'","id":"0","token":"'"${spin40Token}"'"}' http://localhost:8888/api/destinations
-curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin41","destination":"'"${spin41Access}"'","id":"0","token":"'"${spin41Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin31","destination":"'"${spin31Access}"'","id":"1","token":"'"${spin31Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin32","destination":"'"${spin32Access}"'","id":"2","token":"'"${spin32Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin33","destination":"'"${spin33Access}"'","id":"3","token":"'"${spin33Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin34","destination":"'"${spin34Access}"'","id":"4","token":"'"${spin34Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin35","destination":"'"${spin35Access}"'","id":"5","token":"'"${spin35Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin36","destination":"'"${spin36Access}"'","id":"6","token":"'"${spin36Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin37","destination":"'"${spin37Access}"'","id":"7","token":"'"${spin37Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin38","destination":"'"${spin38Access}"'","id":"8","token":"'"${spin38Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin39","destination":"'"${spin39Access}"'","id":"9","token":"'"${spin39Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin40","destination":"'"${spin40Access}"'","id":"10","token":"'"${spin40Token}"'"}' http://localhost:8888/api/destinations
+curl -X POST -H "Content-Type: application/json" -d '{"stream":"spin41","destination":"'"${spin41Access}"'","id":"11","token":"'"${spin41Token}"'"}' http://localhost:8888/api/destinations
 ```
 
 ```
@@ -205,8 +205,28 @@ chmod +x /usr/local/bin/session-rules #make executable
 
 #### Generate tokens we need 
 
-go to our admin machine and the clone of [spinner-amax](https://github.com/practable/spinner-amax) and copy the configure scripts in `sbc/scripts` - we will need to edit them to create logging tokens....
+Use the `configure` script in `scripts/` as follows (these are modified from [spinner-amax](https://github.com/practable/spinner-amax) to only generate access files and tokens for the logging streams.
 
+```
+./configure spin 30 41 https://relay-access.practable.io
+```
+
+copy the files to the server ...
+
+```
+cd ../autogenerated
+tar -cvf session-files.tar ./*
+scp -i ~/your-key.pem user@server:~
+```
+
+```
+#on the server
+mkdir -p /etc/practable
+mv /home/ubuntu/session-files.tar /etc/practable
+cd /etc/practable
+tar -xvf session-files.tar
+rm session-files.tar
+```
 
 
 
@@ -217,3 +237,53 @@ nano session-rules.service #copy in contents above
 systemctl enable session-rules
 systemctl start session-rules
 ```
+
+#### Check that the rules are looking ok
+
+```
+# on the analytics server
+curl -X GET http://localhost:8888/api/destinations/all
+```
+
+You should see destinations for all of the spinners you added in the rules file (not copied in here because they contain credentials)
+
+Now you can connect your logging applications to the local streams, which are:
+
+
+ws://localhost:8888/ws/spin30
+ws://localhost:8888/ws/spin31
+ws://localhost:8888/ws/spin32
+ws://localhost:8888/ws/spin33
+ws://localhost:8888/ws/spin34
+ws://localhost:8888/ws/spin35
+ws://localhost:8888/ws/spin36
+ws://localhost:8888/ws/spin37
+ws://localhost:8888/ws/spin38
+ws://localhost:8888/ws/spin39
+ws://localhost:8888/ws/spin40
+ws://localhost:8888/ws/spin41
+
+You can try connecting using websocat, e.g. 
+
+
+websocat ws://localhost:8888/ws/spin30 - --text
+
+### Python client
+
+We could use Docker, but initial testing is indicating that network modes need sorting out, and since we don't have any issues with other services needing python, we are free to configure the system python3 to have the packages we need for this client script.
+
+We use `scripts/sessionservice` to make one copy of this file for each logging instance (and this is done when you call the `configure` script earlier)
+```
+[Unit]
+Description=session host streaming service
+After=network.target session.service session-rules.service
+[Service]
+Environment="LOG_URL=ws://localhost:8888/ws/spin30"
+Restart=on-failure
+ExecStart=/usr/bin/python3 /opt/analytics/client.py
+
+[Install]
+WantedBy=multi-user.target 
+```
+
+
