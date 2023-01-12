@@ -97,17 +97,8 @@ def on_error(ws, error):
 
 def on_close(ws, close_status_code, close_msg):
     print(close_msg)
-    connected = False   
-    print( "connection lost... reconnecting" )  
-    while not connected:  
-        # attempt to reconnect, otherwise sleep for 2 seconds  
-        try:  
-            connect() 
-            connected = True  
-            print( "re-connection successful" )  
-        except:  
-            print( "re-connection NOT successful, retrying in 2 seconds..." )
-            sleep( 2 )
+    print( "connection lost, exiting" )  
+
 
 def on_open(ws):
     print('opened')
