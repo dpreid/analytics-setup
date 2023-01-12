@@ -369,3 +369,40 @@ use async approach, with dispatcher:
 https://websocket-client.readthedocs.io/en/latest/examples.html#dispatching-multiple-websocketapps
 note that rel is not availabe on conda, so need to use pip install and skip running in spyder 
 
+
+
+Asyncio has more complicated syntax that golang, but it gets the job done (eventually)/ [This example](https://stackoverflow.com/questions/37512182/how-can-i-periodically-execute-a-function-with-asyncio) looks fairly complete (and models what you would do to set up a periodic dump of the adjacency matrix to file)
+
+```python
+import asyncio
+
+async def periodic():
+    while True:
+        print('periodic')
+        await asyncio.sleep(1)
+
+def stop():
+    task.cancel()
+
+loop = asyncio.get_event_loop()
+loop.call_later(5, stop)
+task = loop.create_task(periodic())
+
+try:
+    loop.run_until_complete(task)
+except asyncio.CancelledError:
+    pass
+```
+
+Note you should also add in keyboard interrupt so that you can Ctrl-C your script to stop, and/or stop it from systemctl.
+
+
+## Global store
+
+It's not elegant to have global variables, but this is probably the quickest way to get the job done. Just need to add a mutex!
+Everyone operation that touches the store object needs to request the lock first, then release when done.
+Since you are using asyncio, then using their lock would be a good start: https://docs.python.org/3/library/asyncio-sync.html
+Usual traps are hanging when lock is not released, or when a subroutine requests a lock that has already been requested and obtained by the calling routine.
+
+
+
