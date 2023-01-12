@@ -1,2 +1,2 @@
-systemctl enable "${service}"
-systemctl start "${service}"
+systemctl enable log-${service}
+systemctl start log-${service}

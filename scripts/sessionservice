@@ -13,11 +13,13 @@ done
 
 
 # write a script to enable and start these services
-rm ./enable-logging-clients.sh
-echo "#!/bin/bash"
+scriptfile=./enable-logging-clients.sh
+touch "${scriptfile}"
+rm "${scriptfile}"
+echo "#!/bin/bash" >> ./enable-logging-clients.sh
 for i in $DIR/log.access.*; do
 	[[ $i =~ $filename ]]
 	dest="${BASH_REMATCH[2]}"
-	service="$dest" envsubst < ../files/template.start >> ./enable-logging-clients.sh
+	service="$dest" envsubst < ../files/template.start >> "${scriptfile}"
 done
-chmod +x ./enable-logging-clients.sh
+chmod +x "${scriptfile}"
